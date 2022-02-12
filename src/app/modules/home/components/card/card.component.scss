@@ -4,6 +4,12 @@
   background: lighten($color: #181818, $amount: 8%);
   border-radius: 10px;
 
+  &:hover {
+    cursor: pointer;
+    background: lighten($color: #181818, $amount: 15%);
+    transition: background 0.2s ease-out;
+  }
+
   .card__image {
     display: grid;
     place-items: center;
