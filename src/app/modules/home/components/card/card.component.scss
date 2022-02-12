@@ -1,7 +1,7 @@
 .card {
   width: 250px;
   height: 320px;
-  background: #181818;
+  background: lighten($color: #181818, $amount: 8%);
   border-radius: 10px;
 
   .card__image {
