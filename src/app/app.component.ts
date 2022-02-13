@@ -10,25 +10,7 @@ import { SpotifyService } from './core/services/spotify.service';
 export class AppComponent implements OnInit {
   title = 'spotify';
 
-  constructor(
-    private spotifyService: SpotifyService,
-    private storageService: StorageService
-  ) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    if (!this.storageService.retrieveToken()) {
-      this.getSpotifyToken();
-    }
-  }
-
-  getSpotifyToken() {
-    this.spotifyService.getToken().subscribe(
-      (token) => {
-        this.storageService.saveToken(token);
-      },
-      (error) => {
-        console.error('Something went wrong): ', error);
-      }
-    );
-  }
+  ngOnInit(): void {}
 }
