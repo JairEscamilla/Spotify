@@ -1,3 +1,4 @@
+import { IAlbum, IAlbumItem } from './../models/Album.model';
 import { IArtistElement } from './../models/Artist.mode';
 import { environment } from './../../../environments/environment';
 import { IToken } from './../models/Token.model';
@@ -48,5 +49,11 @@ export class SpotifyService {
     return this.http
       .get<IArtists>(`${environment.apiUrl}/artists?ids=${artistsIds}`)
       .pipe(map((artists) => artists.artists));
+  }
+
+  getArtistAlbums(artistId: string): Observable<IAlbumItem[]> {
+    return this.http
+      .get<IAlbum>(`${environment.apiUrl}/artists/${artistId}/albums`)
+      .pipe(map((albums) => albums.items));
   }
 }
