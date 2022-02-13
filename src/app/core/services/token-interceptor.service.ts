@@ -1,18 +1,25 @@
+import { SpotifyService } from './spotify.service';
 import { StorageService } from './storage.service';
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private spotifyService: SpotifyService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -30,6 +37,17 @@ export class TokenInterceptorService implements HttpInterceptor {
       });
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          this.spotifyService.getToken().subscribe((token) => {
+            this.storageService.saveToken(token);
+            window.location.reload();
+          });
+        }
+
+        return throwError(error);
+      })
+    );
   }
 }
