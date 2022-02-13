@@ -1,15 +1,14 @@
-<div class="card p-4">
+<div class="card p-3 m-3">
   <figure class="card__image">
-    <img [ngClass]="{'card__image--artist': variant === 'artist'}"
-      src="https://i.scdn.co/image/ab67706f00000003568579a7b48bad7547095271" alt="card image">
+    <img [ngClass]="{'card__image--artist': variant === 'Artist'}" [src]="image" alt="card image">
   </figure>
 
   <div class="card__details">
     <h5 class="card__title mt-2 mb-0">
-      Bad Bunny
+      {{title}}
     </h5>
     <span class="card__description">
-      Artista
+      {{variant}}
     </span>
   </div>
 </div>

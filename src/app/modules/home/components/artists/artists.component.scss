@@ -1,0 +1,10 @@
+.artists {
+  .artists__container {
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  .artists__container * {
+    display: inline-block;
+  }
+}

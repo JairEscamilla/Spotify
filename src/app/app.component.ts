@@ -1,3 +1,4 @@
+import { StorageService } from './core/services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from './core/services/spotify.service';
 
@@ -9,20 +10,24 @@ import { SpotifyService } from './core/services/spotify.service';
 export class AppComponent implements OnInit {
   title = 'spotify';
 
-  constructor(private spotifyService: SpotifyService) {}
+  constructor(
+    private spotifyService: SpotifyService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
-    this.getSpotifyToken();
+    if (!this.storageService.retrieveToken()) {
+      this.getSpotifyToken();
+    }
   }
 
   getSpotifyToken() {
-    console.log('Getting token');
     this.spotifyService.getToken().subscribe(
       (token) => {
-        console.log('Token ', token);
+        this.storageService.saveToken(token);
       },
       (error) => {
-        console.error('Este es el error: ', error);
+        console.error('Something went wrong): ', error);
       }
     );
   }
