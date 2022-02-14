@@ -1,7 +1,4 @@
-import { Router } from '@angular/router';
-import { IArtistElement } from './../../../../core/models/Artist.mode';
-import { SpotifyService } from './../../../../core/services/spotify.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'home-artists',
@@ -9,21 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./artists.component.scss'],
 })
 export class ArtistsComponent implements OnInit {
-  isLoading = true;
-  artists: IArtistElement[] = [];
+  @Input() title = '';
+  @Input() isLoading = true;
+  constructor() {}
 
-  constructor(private spotifyService: SpotifyService, private router: Router) {}
-
-  ngOnInit() {
-    this.spotifyService.getArtists().subscribe((artists) => {
-      this.artists = [...artists];
-      this.isLoading = false;
-    });
-  }
-
-  handleClick(artist: IArtistElement) {
-    this.router.navigate([`/albums/${artist.id}`], {
-      queryParams: { name: artist.name },
-    });
-  }
+  ngOnInit() {}
 }
