@@ -14,4 +14,8 @@ export class StorageService {
     const token = localStorage.getItem('token');
     return token;
   }
+
+  clear() {
+    localStorage.clear();
+  }
 }

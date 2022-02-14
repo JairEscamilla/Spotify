@@ -39,6 +39,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+        this.storageService.clear();
         if (error.status === 401) {
           this.spotifyService.getToken().subscribe((token) => {
             this.storageService.saveToken(token);

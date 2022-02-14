@@ -5,8 +5,8 @@
 
   <app-loading *ngIf="isLoading"></app-loading>
   <div class="artists__container">
-    <home-card *ngFor="let artist of artists" variant="Artist" [image]="artist.images[0].url" [title]="artist.name"
+    <app-card *ngFor="let artist of artists" variant="Artist" [image]="artist.images[0].url" [title]="artist.name"
       (click)="handleClick(artist)">
-    </home-card>
+    </app-card>
   </div>
 </section>

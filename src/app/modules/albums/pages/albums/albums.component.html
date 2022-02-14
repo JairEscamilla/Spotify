@@ -1,3 +1,13 @@
-<p>
-  {{ artistName }}
-</p>
+<section class="albums mt-5">
+  <h2 class="ml-4">
+    {{ artistName }}
+  </h2>
+
+  <div class="cards__container">
+    <app-card *ngFor="let album of albums" [image]="album.images[0].url" [title]="album.name"></app-card>
+
+    <app-loading class="my-3"></app-loading>
+  </div>
+
+
+</section>

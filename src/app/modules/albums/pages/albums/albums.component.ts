@@ -1,3 +1,4 @@
+import { IAlbumItem } from './../../../../core/models/Album.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -10,6 +11,8 @@ import { SpotifyService } from 'src/app/core/services/spotify.service';
 })
 export class AlbumsComponent implements OnInit {
   artistName = '';
+  albums: IAlbumItem[] = [];
+  isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +38,8 @@ export class AlbumsComponent implements OnInit {
     );
 
     albumsRequest.subscribe((albums) => {
-      console.log(albums);
+      this.albums = [...albums];
+      this.isLoading = false;
     });
   }
 }
