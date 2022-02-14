@@ -1,5 +1,5 @@
-<home-artists title="Artists" [isLoading]="isLoading">
+<home-slider title="Artists" [isLoading]="isLoading">
   <app-card *ngFor="let artist of artists" variant="Artist" [image]="artist.images[0].url" [title]="artist.name"
     (click)="handleClick(artist)">
   </app-card>
-</home-artists>
+</home-slider>

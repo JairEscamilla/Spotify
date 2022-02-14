@@ -1,10 +1,10 @@
-.artists {
-  .artists__container {
+.slider {
+  .slider__container {
     overflow: auto;
     white-space: nowrap;
   }
 
-  &::ng-deep .artists__container > * {
+  &::ng-deep .slider__container > * {
     display: inline-block;
   }
 }
