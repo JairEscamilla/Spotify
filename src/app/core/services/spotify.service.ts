@@ -21,6 +21,17 @@ export class SpotifyService {
     '7x5Slu7yTE5icZjNsc3OzW',
   ];
 
+  albumsIds = [
+    '3bChCUtpRC1NaCLYD4unbD',
+    '54aEzE4X5e4iZVkM5tSNsA',
+    '6ylFfzx32ICw4L1A7YWNLN',
+    '3bbeAIMaGSW6gUMeGqw5VS',
+    '7FqHuAvmREiIwVXVpZ9ooP',
+    '6IYPmM3xsOPL2XPSvf1ZAz',
+    '0K1mTbmQQ6pcVLoxgk6WMq',
+    '3KuXEGcqLcnEYWnn3OEGy0',
+  ];
+
   constructor(private http: HttpClient) {}
 
   getToken(): Observable<string> {
@@ -49,6 +60,16 @@ export class SpotifyService {
     return this.http
       .get<IArtists>(`${environment.apiUrl}/artists?ids=${artistsIds}`)
       .pipe(map((artists) => artists.artists));
+  }
+
+  getAlbums(): Observable<IAlbumItem[]> {
+    const albumsIds = this.albumsIds.join(',');
+
+    return this.http
+      .get<{
+        albums: IAlbumItem[];
+      }>(`${environment.apiUrl}/albums?ids=${albumsIds}`)
+      .pipe(map((albums) => albums.albums));
   }
 
   getArtistAlbums(artistId: string, page: number): Observable<IAlbumItem[]> {
