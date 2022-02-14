@@ -13,6 +13,9 @@ export class AlbumsComponent implements OnInit {
   artistName = '';
   albums: IAlbumItem[] = [];
   isLoading = true;
+  currentPage = 0;
+  artistId = '';
+  hasMoreResults = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,13 +36,33 @@ export class AlbumsComponent implements OnInit {
   getAlbums() {
     const albumsRequest = this.route.params.pipe(
       switchMap((params) => {
-        return this.spotifyService.getArtistAlbums(params.artist_id);
+        this.artistId = params.artist_id;
+        return this.spotifyService.getArtistAlbums(
+          this.artistId,
+          this.currentPage
+        );
       })
     );
 
     albumsRequest.subscribe((albums) => {
       this.albums = [...albums];
+
       this.isLoading = false;
     });
+  }
+
+  loadNextPage() {
+    if (this.isLoading || !this.hasMoreResults) {
+      return;
+    }
+    this.currentPage++;
+    this.spotifyService
+      .getArtistAlbums(this.artistId, this.currentPage)
+      .subscribe((albums) => {
+        if (albums.length === 0) {
+          this.hasMoreResults = false;
+        }
+        this.albums = [...this.albums, ...albums];
+      });
   }
 }

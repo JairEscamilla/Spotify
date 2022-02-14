@@ -51,9 +51,12 @@ export class SpotifyService {
       .pipe(map((artists) => artists.artists));
   }
 
-  getArtistAlbums(artistId: string): Observable<IAlbumItem[]> {
+  getArtistAlbums(artistId: string, page: number): Observable<IAlbumItem[]> {
+    const offset = 20 * page;
     return this.http
-      .get<IAlbum>(`${environment.apiUrl}/artists/${artistId}/albums`)
+      .get<IAlbum>(
+        `${environment.apiUrl}/artists/${artistId}/albums?offset=${offset}&limit=20`
+      )
       .pipe(map((albums) => albums.items));
   }
 }

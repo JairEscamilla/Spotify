@@ -1,4 +1,8 @@
 .albums {
+  h2 {
+    max-width: 80%;
+  }
+
   .cards__container {
     display: flex;
     flex-direction: column;
