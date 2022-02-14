@@ -42,5 +42,11 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  handleAlbumClick() {}
+  handleAlbumClick(album: IAlbumItem) {
+    this.router.navigate([`/albums/${album.id}/tracks`], {
+      queryParams: {
+        name: album.name,
+      },
+    });
+  }
 }

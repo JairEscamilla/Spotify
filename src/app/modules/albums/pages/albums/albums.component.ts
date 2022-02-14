@@ -1,6 +1,6 @@
 import { IAlbumItem } from './../../../../core/models/Album.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
 
@@ -19,6 +19,7 @@ export class AlbumsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private spotifyService: SpotifyService
   ) {}
 
@@ -64,5 +65,13 @@ export class AlbumsComponent implements OnInit {
         }
         this.albums = [...this.albums, ...albums];
       });
+  }
+
+  handleAlbumClick(album: IAlbumItem) {
+    this.router.navigate([`/albums/${album.id}/tracks`], {
+      queryParams: {
+        name: album.name,
+      },
+    });
   }
 }

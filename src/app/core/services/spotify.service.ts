@@ -1,3 +1,4 @@
+import { ITracksItem, ITracks } from './../models/Tracks.model';
 import { IAlbum, IAlbumItem } from './../models/Album.model';
 import { IArtistElement } from './../models/Artist.mode';
 import { environment } from './../../../environments/environment';
@@ -72,6 +73,10 @@ export class SpotifyService {
       .pipe(map((albums) => albums.albums));
   }
 
+  getAlbum(albumId: string): Observable<IAlbumItem> {
+    return this.http.get<IAlbumItem>(`${environment.apiUrl}/albums/${albumId}`);
+  }
+
   getArtistAlbums(artistId: string, page: number): Observable<IAlbumItem[]> {
     const offset = 20 * page;
     return this.http
@@ -79,5 +84,11 @@ export class SpotifyService {
         `${environment.apiUrl}/artists/${artistId}/albums?offset=${offset}&limit=20`
       )
       .pipe(map((albums) => albums.items));
+  }
+
+  getAlbumTracks(albumId: string): Observable<ITracksItem[]> {
+    return this.http
+      .get<ITracks>(`${environment.apiUrl}/albums/${albumId}/tracks`)
+      .pipe(map((tracks) => tracks.items));
   }
 }

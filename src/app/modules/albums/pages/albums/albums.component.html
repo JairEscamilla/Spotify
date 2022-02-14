@@ -7,7 +7,8 @@
   </h2>
 
   <div class="cards__container">
-    <app-card *ngFor="let album of albums" [image]="album.images[0].url" [title]="album.name"></app-card>
+    <app-card *ngFor="let album of albums" [image]="album.images[0].url" [title]="album.name"
+      (click)="handleAlbumClick(album)"></app-card>
 
     <app-loading *ngIf="hasMoreResults" class="my-3" appObserveVisibility (onVisible)="loadNextPage()">
     </app-loading>
