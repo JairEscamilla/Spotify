@@ -1,6 +1,16 @@
 .tracks {
   .table {
     color: white;
+    tbody {
+      tr {
+        cursor: pointer;
+
+        &:hover {
+          background: lighten($color: #181818, $amount: 15%);
+          transition: background 0.2s ease-out;
+        }
+      }
+    }
   }
 
   .album__info {

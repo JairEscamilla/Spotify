@@ -1,0 +1,33 @@
+<main class="my-5">
+  <app-loading *ngIf="isLoading; else elseBlock"></app-loading>
+
+  <ng-template #elseBlock>
+
+    <div class="album__info">
+      <img [src]="track.album.images[1].url" alt="">
+      <h2 class="mt-5">
+        {{track.album.name}}
+      </h2>
+
+      <h3 class="mt-3">
+        {{track.name}}
+      </h3>
+
+      <h5 *ngFor="let artist of track.artists" class="mt-0">
+        {{artist.name}}
+      </h5>
+
+      <p class="mb-0 mt-3">
+        Popularity: {{track.popularity}}
+      </p>
+
+      <p>
+        Track number: {{track.track_number}}
+      </p>
+      <div plyr class="player" [plyrTitle]="track.name" plyrType="audio" [plyrPlaysInline]="true"
+        [plyrCrossOrigin]="true" [plyrSources]="audioSources"></div>
+    </div>
+
+  </ng-template>
+
+</main>

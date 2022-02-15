@@ -1,0 +1,17 @@
+main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h2 {
+    max-width: 80%;
+  }
+
+  a {
+    border: 1px solid white;
+    padding: 0.8rem 1rem;
+    border-radius: 15px;
+  }
+}

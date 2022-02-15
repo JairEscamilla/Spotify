@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ITracksItem, ITracks } from './../models/Tracks.model';
 import { IAlbum, IAlbumItem } from './../models/Album.model';
 import { IArtistElement } from './../models/Artist.mode';
@@ -16,24 +17,27 @@ export class SpotifyService {
   artistsIds = [
     '1Ffb6ejR6Fe5IamqA5oRUF',
     '4q3ewBCX7sLwd24euuV69X',
+    '13wFTN72PGSUxzEHJP5Ljs',
     '12Chz98pHFMPJEknJQMWvI',
-    '1Qp56T7n950O3EGMsSl81D',
+    '11mqrDSFRRz8g0Wb3syJj5',
+    '2nszmSgqreHSdJA3zWPyrW',
+    '09xj0S68Y1OU1vHMCZAIvz',
     '57ekbx9PSS4ORs5wTZMSYp',
     '7x5Slu7yTE5icZjNsc3OzW',
   ];
 
   albumsIds = [
-    '3bChCUtpRC1NaCLYD4unbD',
+    '41VfVz6sKvbm1yCbqAlwfM',
     '54aEzE4X5e4iZVkM5tSNsA',
-    '6ylFfzx32ICw4L1A7YWNLN',
+    '59wgQxKgwb9vnpurJ7DSb7',
     '3bbeAIMaGSW6gUMeGqw5VS',
     '7FqHuAvmREiIwVXVpZ9ooP',
     '6IYPmM3xsOPL2XPSvf1ZAz',
-    '0K1mTbmQQ6pcVLoxgk6WMq',
+    '7EJ5pXrSqqfybKyfbvlz84',
     '3KuXEGcqLcnEYWnn3OEGy0',
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getToken(): Observable<string> {
     const client_id = 'dcee94f8e3df4500bd32f67e5bfa1227';
@@ -90,5 +94,15 @@ export class SpotifyService {
     return this.http
       .get<ITracks>(`${environment.apiUrl}/albums/${albumId}/tracks`)
       .pipe(map((tracks) => tracks.items));
+  }
+
+  getTrackDetail(trackId: string) {
+    return this.http.get<ITracksItem & { album: IAlbumItem }>(
+      `${environment.apiUrl}/tracks/${trackId}`
+    );
+  }
+
+  handleNotFound() {
+    this.router.navigate(['/not-found']);
   }
 }

@@ -2,7 +2,7 @@ import { IAlbumItem } from './../../../../core/models/Album.model';
 import { ITracksItem } from './../../../../core/models/Tracks.model';
 import { switchMap } from 'rxjs/operators';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -19,6 +19,7 @@ export class TracksComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private spotifyService: SpotifyService
   ) {}
 
@@ -42,9 +43,12 @@ export class TracksComponent implements OnInit {
       })
     );
 
-    tracksObservable.subscribe((tracks) => {
-      this.tracks = [...tracks];
-    });
+    tracksObservable.subscribe(
+      (tracks) => {
+        this.tracks = [...tracks];
+      },
+      () => this.spotifyService.handleNotFound()
+    );
   }
 
   getAlbum() {
@@ -52,5 +56,9 @@ export class TracksComponent implements OnInit {
       this.album = album;
       this.isLoading = false;
     });
+  }
+
+  handleTrackClick(track: ITracksItem) {
+    this.router.navigate([`/tracks/${track.id}`]);
   }
 }

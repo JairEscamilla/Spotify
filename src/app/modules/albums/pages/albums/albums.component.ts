@@ -45,11 +45,14 @@ export class AlbumsComponent implements OnInit {
       })
     );
 
-    albumsRequest.subscribe((albums) => {
-      this.albums = [...albums];
+    albumsRequest.subscribe(
+      (albums) => {
+        this.albums = [...albums];
 
-      this.isLoading = false;
-    });
+        this.isLoading = false;
+      },
+      () => this.spotifyService.handleNotFound()
+    );
   }
 
   loadNextPage() {

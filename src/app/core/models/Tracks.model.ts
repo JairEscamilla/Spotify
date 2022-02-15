@@ -23,6 +23,7 @@ export interface ITracksItem {
   name: string;
   preview_url: string;
   track_number: number;
+  popularity?: number;
   type: string;
   uri: string;
 }

@@ -31,9 +31,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let track of tracks; index as i">
+          <tr *ngFor="let track of tracks" (click)="handleTrackClick(track)">
             <th scope="row">
-              {{i+1}}
+              {{track.track_number}}
             </th>
 
             <td>
