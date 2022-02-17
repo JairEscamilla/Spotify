@@ -6,10 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { StickyNavDirective } from './components/navbar/stickyNav.directive';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundPageComponent],
+  declarations: [
+    AppComponent,
+    NotFoundPageComponent,
+    NavbarComponent,
+    StickyNavDirective,
+  ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
   providers: [
     {
