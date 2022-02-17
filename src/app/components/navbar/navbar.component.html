@@ -1,11 +1,11 @@
-<nav class="navigation py-4" appStickyNav>
+<nav class="navigation py-4 " appStickyNav>
   <ul class="navigation__list d-flex justify-content-around mb-0">
     <li class="navigation__list--item">
-      <a (click)="goBack()">
+      <a (click)="goBack()" *ngIf="goBackIsVisible">
         < Go back </a>
     </li>
     <li class="navigation__list--item">
-      <a routerLink="/" routerLinkActive="d-none" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/">
         Home
       </a>
     </li>

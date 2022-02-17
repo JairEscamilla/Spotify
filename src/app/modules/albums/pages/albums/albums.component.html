@@ -1,5 +1,5 @@
 <section class="albums my-5">
-  <h2 class="ml-4">
+  <h2 class="ml-4 mb-4 text-center">
     {{ artistName }}
   </h2>
 
@@ -7,9 +7,9 @@
     <app-card *ngFor="let album of albums" [image]="album.images[0].url" [title]="album.name"
       (click)="handleAlbumClick(album)"></app-card>
 
-    <app-loading *ngIf="hasMoreResults" class="my-3" appObserveVisibility (onVisible)="loadNextPage()">
-    </app-loading>
   </div>
+  <app-loading *ngIf="hasMoreResults" class="my-3" appObserveVisibility (onVisible)="loadNextPage()">
+  </app-loading>
 
 
 </section>

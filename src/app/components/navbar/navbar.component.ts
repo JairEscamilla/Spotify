@@ -8,24 +8,19 @@ import { Location } from '@angular/common';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  private history: string[] = [];
+  goBackIsVisible = false;
 
   constructor(private location: Location, private router: Router) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.history.push(event.urlAfterRedirects);
+        this.goBackIsVisible = event.urlAfterRedirects !== '/';
       }
     });
   }
 
   goBack() {
-    this.history.pop();
-    if (this.history.length > 0) {
-      this.location.back();
-    } else {
-      this.router.navigateByUrl('/');
-    }
+    this.location.back();
   }
 }

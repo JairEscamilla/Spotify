@@ -9,6 +9,10 @@ export class StickyNavDirective {
   @HostListener('window:scroll', ['$event'])
   handleScroll(e: Event) {
     e.stopPropagation();
+
+    console.log(window.innerHeight);
+    console.log(window.scrollY);
+
     if (window.scrollY > 0) {
       this.element.nativeElement.classList.add('sticky');
     } else {

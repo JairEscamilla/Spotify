@@ -1,20 +1,18 @@
-<main class="my-5">
-  <home-slider title="Artists" [isLoading]="artistsIsLoading">
-    <app-card *ngFor="let artist of artists" variant="Artist" [image]="artist.images[0].url" [title]="artist.name"
-      (click)="handleArtistClick(artist)">
-    </app-card>
-  </home-slider>
+<home-slider title="Artists" [isLoading]="artistsIsLoading">
+  <app-card *ngFor="let artist of artists" variant="Artist" [image]="artist.images[0].url" [title]="artist.name"
+    (click)="handleArtistClick(artist)">
+  </app-card>
+</home-slider>
 
 
-  <home-slider title=" Albums" [isLoading]="albumsIsLoading">
-    <app-card *ngFor="let album of albums" [image]="album.images[0].url" [title]="album.name"
-      (click)="handleAlbumClick(album)"></app-card>
-  </home-slider>
+<home-slider title=" Albums" [isLoading]="albumsIsLoading">
+  <app-card *ngFor="let album of albums" [image]="album.images[0].url" [title]="album.name"
+    (click)="handleAlbumClick(album)"></app-card>
+</home-slider>
 
 
-  <home-slider title="Top Artists" [isLoading]="artistsIsLoading">
-    <app-card *ngFor="let artist of artists.reverse()" variant="Artist" [image]="artist.images[0].url"
-      [title]="artist.name" (click)="handleArtistClick(artist)">
-    </app-card>
-  </home-slider>
-</main>
+<home-slider title="Top Artists" [isLoading]="artistsIsLoading">
+  <app-card *ngFor="let artist of artists.reverse()" variant="Artist" [image]="artist.images[0].url"
+    [title]="artist.name" (click)="handleArtistClick(artist)">
+  </app-card>
+</home-slider>
