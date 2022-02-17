@@ -5,7 +5,7 @@
         < Go back </a>
     </li>
     <li class="navigation__list--item">
-      <a [routerLink]="['/']">
+      <a routerLink="/" routerLinkActive="d-none" [routerLinkActiveOptions]="{ exact: true }">
         Home
       </a>
     </li>
