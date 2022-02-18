@@ -1,4 +1,4 @@
-import { IAlbumItem } from './../../../core/models/Album.model';
+import { IAlbumItem } from '@core/models/Album.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IArtistElement } from 'src/app/core/models/Artist.mode';
@@ -13,6 +13,7 @@ export class HomePageComponent implements OnInit {
   artistsIsLoading = true;
   albumsIsLoading = true;
   artists: IArtistElement[] = [];
+  topArtists: IArtistElement[] = [];
   albums: IAlbumItem[] = [];
 
   constructor(private spotifyService: SpotifyService, private router: Router) {}
@@ -25,6 +26,7 @@ export class HomePageComponent implements OnInit {
   getArtists() {
     this.spotifyService.getArtists().subscribe((artists) => {
       this.artists = [...artists];
+      this.topArtists = [...artists].reverse();
       this.artistsIsLoading = false;
     });
   }
@@ -37,16 +39,10 @@ export class HomePageComponent implements OnInit {
   }
 
   handleArtistClick(artist: IArtistElement) {
-    this.router.navigate([`/albums/${artist.id}`], {
-      queryParams: { name: artist.name },
-    });
+    this.router.navigate([`/albums/${artist.id}`]);
   }
 
   handleAlbumClick(album: IAlbumItem) {
-    this.router.navigate([`/albums/${album.id}/tracks`], {
-      queryParams: {
-        name: album.name,
-      },
-    });
+    this.router.navigate([`/albums/${album.id}/tracks`]);
   }
 }

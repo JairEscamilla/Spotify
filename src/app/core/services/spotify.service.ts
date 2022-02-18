@@ -1,14 +1,15 @@
 import { Router } from '@angular/router';
-import { ITracksItem, ITracks } from './../models/Tracks.model';
-import { IAlbum, IAlbumItem } from './../models/Album.model';
-import { IArtistElement } from './../models/Artist.mode';
-import { environment } from './../../../environments/environment';
-import { IToken } from './../models/Token.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { IArtists } from '../models/Artist.mode';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { ITracksItem, ITracks } from '@core/models/Tracks.model';
+import { IAlbum, IAlbumItem } from '@core/models/Album.model';
+import { IArtistElement } from '@core/models/Artist.mode';
+import { environment } from '@environments/environment';
+import { IToken } from '@core/models/Token.model';
+import { IArtists } from '@core/models/Artist.mode';
 
 @Injectable({
   providedIn: 'root',
@@ -99,6 +100,12 @@ export class SpotifyService {
   getTrackDetail(trackId: string) {
     return this.http.get<ITracksItem & { album: IAlbumItem }>(
       `${environment.apiUrl}/tracks/${trackId}`
+    );
+  }
+
+  getArtist(artistId: string): Observable<IArtistElement> {
+    return this.http.get<IArtistElement>(
+      `${environment.apiUrl}/artists/${artistId}`
     );
   }
 

@@ -1,4 +1,4 @@
-import { TrackDetailComponent } from './pages/track-detail/track-detail.component';
+import { TrackDetailComponent } from './track-detail/track-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

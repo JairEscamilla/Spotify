@@ -12,7 +12,7 @@
 
 
 <home-slider title="Top Artists" [isLoading]="artistsIsLoading">
-  <app-card *ngFor="let artist of artists.reverse()" variant="Artist" [image]="artist.images[0].url"
-    [title]="artist.name" (click)="handleArtistClick(artist)">
+  <app-card *ngFor="let artist of topArtists" variant="Artist" [image]="artist.images[0].url" [title]="artist.name"
+    (click)="handleArtistClick(artist)">
   </app-card>
 </home-slider>

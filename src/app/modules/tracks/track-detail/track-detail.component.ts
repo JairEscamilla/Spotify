@@ -1,10 +1,11 @@
-import { IAlbumItem } from './../../../../core/models/Album.model';
-import { ITracksItem } from './../../../../core/models/Tracks.model';
-import { IAudioInterface } from './../../../../core/models/AudioSource.model';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+import { IAlbumItem } from '@core/models/Album.model';
+import { ITracksItem } from '@core/models/Tracks.model';
+import { IAudioInterface } from '@core/models/AudioSource.model';
 import { switchMap } from 'rxjs/operators';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-track-detail',
@@ -18,8 +19,7 @@ export class TrackDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private spotifyService: SpotifyService,
-    private router: Router
+    private spotifyService: SpotifyService
   ) {}
 
   ngOnInit() {

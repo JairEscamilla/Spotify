@@ -1,6 +1,6 @@
 import { TracksComponent } from './pages/tracks/tracks.component';
 import { ObserveVisibilityDirective } from './directives/observe-visibility.directive';
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

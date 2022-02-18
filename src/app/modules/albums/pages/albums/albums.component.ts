@@ -1,7 +1,7 @@
-import { IAlbumItem } from './../../../../core/models/Album.model';
+import { IAlbumItem } from '@core/models/Album.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { concatMap, switchMap } from 'rxjs/operators';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
 
 @Component({
@@ -25,13 +25,6 @@ export class AlbumsComponent implements OnInit {
 
   ngOnInit() {
     this.getAlbums();
-    this.getArtistName();
-  }
-
-  getArtistName() {
-    this.route.queryParams.subscribe((params) => {
-      this.artistName = params.name;
-    });
   }
 
   getAlbums() {
@@ -45,14 +38,20 @@ export class AlbumsComponent implements OnInit {
       })
     );
 
-    albumsRequest.subscribe(
-      (albums) => {
-        this.albums = [...albums];
-
-        this.isLoading = false;
-      },
-      () => this.spotifyService.handleNotFound()
-    );
+    albumsRequest
+      .pipe(
+        concatMap((albums) => {
+          this.albums = [...albums];
+          return this.spotifyService.getArtist(this.artistId);
+        })
+      )
+      .subscribe(
+        (artist) => {
+          this.artistName = artist.name;
+          this.isLoading = false;
+        },
+        () => this.spotifyService.handleNotFound()
+      );
   }
 
   loadNextPage() {

@@ -1,9 +1,10 @@
-import { IAlbumItem } from './../../../../core/models/Album.model';
-import { ITracksItem } from './../../../../core/models/Tracks.model';
 import { switchMap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+
+import { ITracksItem } from '@core/models/Tracks.model';
+import { IAlbumItem } from '@core/models/Album.model';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tracks',
@@ -24,15 +25,8 @@ export class TracksComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getAlbumName();
     this.getTracks();
     this.getAlbum();
-  }
-
-  getAlbumName() {
-    this.route.queryParams.subscribe((params) => {
-      this.albumName = params.name;
-    });
   }
 
   getTracks() {
@@ -54,6 +48,7 @@ export class TracksComponent implements OnInit {
   getAlbum() {
     this.spotifyService.getAlbum(this.albumId).subscribe((album) => {
       this.album = album;
+      this.albumName = this.album.name;
       this.isLoading = false;
     });
   }

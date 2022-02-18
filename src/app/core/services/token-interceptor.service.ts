@@ -1,5 +1,3 @@
-import { SpotifyService } from './spotify.service';
-import { StorageService } from './storage.service';
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -10,7 +8,9 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+
+import { SpotifyService } from './spotify.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
